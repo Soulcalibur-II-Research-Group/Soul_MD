@@ -59,7 +59,7 @@ class VM(object): #Vertex Model, Xbox = X GC = G (Example VMX,VMG so on)
         self.materialOffset = self.header.MaterialsInfo['offset']
         self.f.seek(self.header.MaterialsInfo['offset'])
         for x in range(self.header.MaterialsInfo['count']):
-            a = Material()
+            a = Material(self.header.Endian)
             a.textureOffset = self.textureOffset
             a.read(self.f)
             self.materials.append(a)

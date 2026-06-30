@@ -18,9 +18,9 @@ class Material(object):
             f.u16(self.size)
             for x in self.value:
                 f.f32(x)
-    def __init__(self):
+    def __init__(self,isCube=False):
         self.textureOffset = 0
-
+        self.isCube = isCube
         self.Type = 0
         self.unk1 = 0
         self.unk2 = 0
@@ -35,22 +35,22 @@ class Material(object):
         self.AmbientRGBA = [0.0]*4
         self.DiffuseRGBA = [1.0]*4
         self.SpecularRGBA = [0.2,0.2,0.2,20.0]
-    def calc_texture_index(self,offset,isCube=False):
+    def calc_texture_index(self,offset):
         idx = None
         if(offset>self.textureOffset):#0 just means there is no index
             rel = offset - (self.textureOffset + 0x14)#Skip to where the vxt is and the header
             div = 0x24
-            if(isCube):
+            if(self.isCube):
                 rel-=4
                 div = 0x44
             idx = int(rel/div)
         return idx
-    def write_texture_offset(self,indx,isCube=False):
+    def write_texture_offset(self,indx):
         if(indx is None):
             return 0
         else:
             muit = 0x24
-            if(isCube):
+            if(self.isCube):
                 muit = 0x44
             return (self.textureOffset + (indx * muit))
     
