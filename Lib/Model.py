@@ -130,15 +130,15 @@ class VM(object): #Vertex Model, Xbox = X GC = G (Example VMX,VMG so on)
         head = 0x4C # Most stuff start here... after header
         self.header.Layer0Info['offset'] = head
         self.header.Layer0Info['count'] = len(self.Object_0)
-        head += len(self.Object_0)*40
+        head += len(self.Object_0)*56
 
         self.header.Layer1Info['offset'] = head
         self.header.Layer1Info['count'] = len(self.Object_1)
-        head += len(self.Object_1)*40
+        head += len(self.Object_1)*56
 
         self.header.Layer2Info['offset'] = head
         self.header.Layer2Info['count'] = len(self.Object_2)
-        head += len(self.Object_2)*40
+        head += len(self.Object_2)*56
         self.header.TextureMapOffset = head
         
         for x in self.materials:
@@ -168,7 +168,7 @@ class VM(object): #Vertex Model, Xbox = X GC = G (Example VMX,VMG so on)
         self.header.MatricesInfo['offset'] = head
         self.materixOffset = head
         self.header.MatricesInfo['count'] = len(self.matrix_table)
-        head += len(self.matrix_table) * 400
+        head += len(self.matrix_table) * 336
 
         self.unkMtx.Offset = head
         self.materialOffset = head
